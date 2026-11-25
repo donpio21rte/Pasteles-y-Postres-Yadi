@@ -1,4 +1,4 @@
-import { business, categories, products, reviews, gallery } from './content.js';
+import { business, categories, products, reviews, gallery } from './content.js?v=20261125-2';
 
 const $ = (selector) => document.querySelector(selector);
 const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');

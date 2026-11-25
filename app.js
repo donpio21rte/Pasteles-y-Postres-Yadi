@@ -4,6 +4,7 @@ const $ = (selector) => document.querySelector(selector);
 const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
 const imageUrl = (name) => `assets/${name}.webp`;
 const money = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 });
+const priceLabel = (price) => price === null ? 'Por cotizar' : `${money.format(price)} MXN`;
 const productById = new Map(products.map((product) => [product.id, product]));
 const whatsappUrl = (message = '') => `https://wa.me/${business.whatsapp}${message ? '?text=' + encodeURIComponent(message) : ''}`;
 const cart = $('#cart');
@@ -43,7 +44,7 @@ filterGroup.innerHTML = [{ id: 'all', name: 'Todos' }, ...categories].map(({ id,
 const cards = new Map(products.map(({ id, name, image, description, price }) => {
   const card = document.createElement('article');
   card.className = 'product-card';
-  card.innerHTML = `<img src="${imageUrl(image)}" alt="${name}" loading="lazy" width="512" height="512"><div class="product-info"><h3>${name}</h3><p>${description}</p><div class="product-buy"><strong>${money.format(price)} MXN</strong><button class="button outline" type="button" data-product="${id}" aria-label="Agregar ${name} a mi pedido">Agregar <span aria-hidden="true">+</span></button></div></div>`;
+  card.innerHTML = `<img src="${imageUrl(image)}" alt="${name}" loading="lazy" width="512" height="512"><div class="product-info"><h3>${name}</h3><p>${description}</p><div class="product-buy"><strong>${priceLabel(price)}</strong><button class="button outline" type="button" data-product="${id}" aria-label="Agregar ${name} a mi pedido">Agregar <span aria-hidden="true">+</span></button></div></div>`;
   return [id, card];
 }));
 productGrid.append(...cards.values());
@@ -94,12 +95,15 @@ $('#categories').addEventListener('click', (event) => {
 function renderCart() {
   $('#cart-count').textContent = [...quantities.values()].reduce((sum, count) => sum + count, 0);
   let total = 0;
+  let needsQuote = false;
   cartItems.innerHTML = [...quantities].map(([id, count]) => {
     const { name, price } = productById.get(id);
-    total += price * count;
-    return `<div class="cart-row"><div><strong>${name}</strong><small>${money.format(price * count)} MXN</small></div><div class="quantity"><button type="button" data-id="${id}" data-step="-1" aria-label="Quitar una unidad de ${name}">−</button><span>${count}</span><button type="button" data-id="${id}" data-step="1" aria-label="Agregar una unidad de ${name}">+</button></div></div>`;
+    if (price === null) needsQuote = true;
+    else total += price * count;
+    const linePrice = price === null ? null : price * count;
+    return `<div class="cart-row"><div><strong>${name}</strong><small>${priceLabel(linePrice)}</small></div><div class="quantity"><button type="button" data-id="${id}" data-step="-1" aria-label="Quitar una unidad de ${name}">−</button><span>${count}</span><button type="button" data-id="${id}" data-step="1" aria-label="Agregar una unidad de ${name}">+</button></div></div>`;
   }).join('') || '<p>Tu pedido está vacío.</p>';
-  $('#cart-total').textContent = `${money.format(total)} MXN`;
+  $('#cart-total').textContent = needsQuote ? priceLabel(null) : priceLabel(total);
   orderButton.disabled = quantities.size === 0;
 }
 function changeQuantity(id, step) {
@@ -136,8 +140,9 @@ cartItems.addEventListener('click', (event) => {
 });
 orderButton.addEventListener('click', () => {
   const lines = [...quantities].map(([id, count]) => `• ${count} × ${productById.get(id).name}`);
-  window.open(whatsappUrl(['Hola, Yadi. Me gustaría cotizar este pedido:', ...lines,
-    `Total de referencia: ${$('#cart-total').textContent}`, '¿Me puedes confirmar precio y disponibilidad?'].join('\n')), '_blank', 'noopener');
+  const needsQuote = [...quantities.keys()].some((id) => productById.get(id).price === null);
+  const estimate = needsQuote ? [] : [`Total de referencia: ${$('#cart-total').textContent}`];
+  window.open(whatsappUrl(['Hola, Yadi. Me gustaría cotizar este pedido:', ...lines, ...estimate, '¿Me puedes confirmar precio y disponibilidad?'].join('\n')), '_blank', 'noopener');
   $('#cart-status').textContent = 'Revisa el mensaje y envíalo desde WhatsApp para confirmar disponibilidad.';
 });
 

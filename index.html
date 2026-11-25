@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Pasteles artesanales, postres y creaciones personalizadas para tus celebraciones.">
+  <meta name="theme-color" content="#fff8f3">
+  <title>Pasteles y Postres Yadi | Pastelería artesanal</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#inicio">Saltar al contenido</a>
+  <header class="header">
+    <div class="nav-shell">
+      <a class="brand" href="#inicio" aria-label="Pasteles y Postres Yadi, inicio"><img class="brand-icon" src="assets/logo.webp" alt="" width="44" height="44"><span>Pasteles y Postres Yadi<small>REPOSTERÍA ARTESANAL</small></span></a>
+      <button class="menu-toggle" type="button" aria-controls="navigation" aria-expanded="false" aria-label="Abrir menú"><span></span><span></span></button>
+      <nav id="navigation" aria-label="Principal">
+        <a href="#inicio">Inicio</a><a href="#catalogo">Catálogo</a><a href="#personalizados">Pasteles personalizados</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a>
+      </nav>
+      <button class="bag" type="button" data-open-cart aria-label="Abrir mi pedido"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 8h14l1 13H4L5 8Zm4 1V6a3 3 0 1 1 6 0v3"/></svg> <span class="bag-label">Mi pedido</span><span id="cart-count">0</span></button>
+    </div>
+  </header>
+  <main id="inicio">
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-inner wrap">
+        <div class="hero-copy">
+          <p class="eyebrow"><span aria-hidden="true">✦</span> PASTELERÍA ARTESANAL</p>
+          <h1 id="hero-heading">La vida sabe<br>mejor <em>a pastel.</em></h1>
+          <p>Pasteles y postres hechos a mano, con los sabores de siempre y un toque especial para cada ocasión.</p>
+          <div class="actions"><a class="button primary" href="#catalogo">Ver catálogo <span aria-hidden="true">→</span></a><a class="button outline" href="#contacto" data-quote>Cotizar pastel</a></div>
+        </div>
+        <figure class="hero-photo"><img src="assets/banner.webp" alt="Ilustración de Yadi entre flores, un pastel de fresas y donas" width="1280" height="720" fetchpriority="high"></figure>
+      </div>
+    </section>
+    <section class="section wrap categories" aria-labelledby="categories-heading">
+      <div class="section-heading reveal"><p class="eyebrow">ENCUENTRA TU ANTOJO</p><h2 id="categories-heading">¿Qué se te antoja hoy?</h2></div>
+      <div class="category-grid" id="categories"></div>
+    </section>
+    <section class="section catalog" id="catalogo" aria-labelledby="catalog-heading">
+      <div class="wrap">
+        <div class="section-heading reveal"><h2 id="catalog-heading">Los favoritos de la casa</h2><p>Precios de referencia en MXN. Confirma disponibilidad por WhatsApp.</p></div>
+        <div id="filters" class="filters" role="group" aria-label="Filtrar productos por categoría"></div>
+        <p class="sr-only" id="filter-status" role="status"></p>
+        <div class="product-grid" id="products"></div>
+      </div>
+    </section>
+    <section class="section wrap split" id="personalizados" aria-labelledby="custom-heading">
+      <figure class="split-photo reveal from-left"><img src="assets/taller.webp" alt="Decoración a mano de un pastel para una celebración" loading="lazy" width="512" height="512"></figure>
+      <div class="split-copy reveal from-right">
+        <p class="eyebrow">PASTELES A MEDIDA Y MESAS DE POSTRES</p><h2 id="custom-heading">Tu celebración, <em>a tu gusto.</em></h2>
+        <p>Diseñamos pasteles y mesas de postres para cumpleaños, bodas y otras celebraciones.</p>
+        <ol class="steps"><li><strong>Cuéntanos tu idea</strong><span>Comparte la fecha, las porciones y tu inspiración.</span></li><li><strong>Elige tu diseño y sabor</strong><span>Definimos los detalles y preparamos una cotización.</span></li><li><strong>Confirma tu pedido</strong><span>Acordamos contigo cuándo estará listo.</span></li></ol>
+        <a class="button primary" href="#contacto" data-quote>Cotizar mi evento <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+    <section class="section story" id="nosotros" aria-labelledby="story-heading">
+      <div class="wrap split">
+        <div class="split-copy reveal"><p class="eyebrow">NUESTRA HISTORIA</p><h2 id="story-heading">El gusto de hacer las cosas <em>a mano.</em></h2><p>Nos inspiran los postres que invitan a volver por otra rebanada. Elegimos ingredientes frescos, horneamos a diario y cuidamos a mano cada acabado.</p><p>Queremos que cada pedido tenga ese sabor casero que recuerdas y se vea tan bien como sabe.</p></div>
+        <figure class="split-photo story-photo reveal"><img src="assets/galletas.webp" alt="Galletas artesanales de chocolate recién horneadas" loading="lazy" width="512" height="512"></figure>
+      </div>
+    </section>
+    <section class="section social" aria-labelledby="social-heading">
+      <div class="section-heading wrap reveal"><h2 id="social-heading">Momentos para compartir</h2><p>Reseñas de ejemplo</p><button class="filter review-toggle" type="button" aria-pressed="false">Pausar reseñas</button></div>
+      <div class="review-window" id="reviews" role="region" aria-label="Reseñas de ejemplo" tabindex="0"></div>
+      <div class="wrap"><div class="section-heading gallery-heading reveal"><h3>De nuestro obrador</h3></div><div class="gallery" id="gallery"></div></div>
+    </section>
+    <section class="section contact" id="contacto" aria-labelledby="contact-heading">
+      <div class="wrap split">
+        <div class="split-copy reveal"><p class="eyebrow">CONTACTO</p><h2 id="contact-heading">Hablemos de tu próximo pastel.</h2><p>Cuéntanos qué imaginas para tu celebración.</p>
+          <div class="location-card reveal"><div class="location-icon" aria-hidden="true">⌖</div><div><h3>Visítanos</h3><p id="location-address">Dirección por confirmar</p><p id="location-hours">Horarios por confirmar</p><p><a href="tel:+523271082696">327 108 2696</a></p><a id="map-link" hidden target="_blank" rel="noopener">Cómo llegar →</a></div></div>
+        </div>
+        <form id="contact-form" class="contact-form reveal"><h3>Solicita una cotización</h3><div class="form-pair"><label>Nombre<input name="nombre" autocomplete="name" required placeholder="Tu nombre"></label><label>Correo<input name="correo" type="email" autocomplete="email" required placeholder="tu@correo.com"></label></div><div class="form-pair"><label>Motivo<select name="motivo"><option>Consulta general</option><option>Pastel personalizado</option><option>Mesa de postres</option></select></label><label>Fecha del evento<input name="fecha" type="date"></label></div><label>Mensaje<textarea name="mensaje" rows="4" required placeholder="Cuéntanos qué te gustaría pedir"></textarea></label><button class="button primary" type="submit">Continuar por WhatsApp <span aria-hidden="true">→</span></button><p id="contact-status" class="status" role="status"></p></form>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="wrap reveal">
+      <div class="footer-main"><a class="brand" href="#inicio"><img class="brand-icon" src="assets/logo.webp" alt="" width="44" height="44"><span>Pasteles y Postres Yadi<small>REPOSTERÍA ARTESANAL</small></span></a><div class="footer-links"><a href="#catalogo">Catálogo</a><a href="#personalizados">Personalizados</a><a href="#contacto">Contacto</a><a id="instagram" hidden target="_blank" rel="noopener">Instagram →</a><a id="facebook" hidden target="_blank" rel="noopener">Facebook →</a></div></div>
+      <p class="copyright">© <span id="year"></span> Pasteles y Postres Yadi. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+  <a class="whatsapp" id="whatsapp" href="#contacto" aria-label="Contacto y cotizaciones" title="Contacto y cotizaciones"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.6 7.5l-4.4 1.1 1.1-4.3a8.5 8.5 0 1 1 15.9-4.3Z" stroke="currentColor" stroke-width="1.6"/><path d="M8.6 8.2c-.5.4-.6 1.2-.2 2.2.8 2 2.5 3.6 4.6 4.3 1 .3 1.9.1 2.3-.5l.4-.7-2-1-.7.8c-1.3-.5-2.2-1.4-2.8-2.7l.7-.7-.9-2.1-.7.1-.7.3Z" fill="currentColor"/></svg></a>
+  <dialog id="cart" class="cart" aria-labelledby="cart-heading"><div class="cart-header"><h2 id="cart-heading">Mi pedido</h2><form method="dialog"><button class="icon-button" aria-label="Cerrar pedido">×</button></form></div><div id="cart-items"></div><div class="cart-total"><strong>Total estimado</strong><span id="cart-total"></span></div><button class="button primary" type="button" id="send-order">Pedir por WhatsApp</button><p id="cart-status" class="status" role="status"></p></dialog>
+  <dialog id="photo-dialog" class="photo-dialog" aria-label="Foto de la galería"><form method="dialog"><button class="icon-button" aria-label="Cerrar foto">×</button></form><img alt=""></dialog>
+  <p id="announcement" class="sr-only" role="status"></p>
+</body>
+</html>
